@@ -1,6 +1,6 @@
 import React from 'react';
 import MapView from 'react-native-maps';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Linking, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,6 +19,21 @@ const styles = StyleSheet.create({
 });
 
 const AddressItem = ({ wat }) => {
+  const onMarkerPress = (lat, lng) => {
+    const scheme = Platform.select({
+      ios: 'maps:0,0?q=',
+      android: 'geo:0,0?q=',
+    });
+    const latLng = `${lat},${lng}`;
+    const label = wat.title;
+    const url = Platform.select({
+      ios: `${scheme}${label}@${latLng}`,
+      android: `${scheme}${latLng}(${label})`,
+    });
+
+    Linking.openURL(url);
+  };
+
   return (
     <View style={styles.container}>
       <MapView
@@ -39,6 +54,7 @@ const AddressItem = ({ wat }) => {
             latitude: wat.location.lat,
             longitude: wat.location.long,
           }}
+          onPress={() => onMarkerPress(wat.location.lat, wat.location.long)}
         />
       </MapView>
       <Text style={styles.addressText}>{wat.address}</Text>
