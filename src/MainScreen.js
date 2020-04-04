@@ -37,7 +37,7 @@ const MainScreen = ({ navigation }) => {
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.content}>
-          <Text style={styles.headerText}>ท่องเที่ยวสายวัฒนธรรม</Text>
+          <Text style={styles.headerText}>ท่องเที่ยวเชิงวัฒนธรรม</Text>
           {wats.map((wat) => (
             <MainItem
               key={wat.title}

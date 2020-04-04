@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Line from './Line';
+import ReadMore from './ReadMore';
 
 const itemWidth = Dimensions.get('window').width - 40;
 const styles = StyleSheet.create({
@@ -22,11 +23,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     fontFamily: 'drboran',
   },
+  detailTextContainer: {
+    paddingTop: 10,
+    paddingHorizontal: 20,
+  },
   detailText: {
     fontSize: 16,
     color: 'black',
-    paddingTop: 10,
-    paddingHorizontal: 20,
   },
   listContent: {
     paddingLeft: 20,
@@ -75,7 +78,13 @@ const AlbumItem = ({ place, onPicturePress }) => {
         )}
         keyExtractor={(_, index) => `${index}`}
       />
-      {place.detail && <Text style={styles.detailText}>{place.detail}</Text>}
+      {place.detail && (
+        <View style={styles.detailTextContainer}>
+          <ReadMore numberOfLines={4}>
+            <Text style={styles.detailText}>{place.detail}</Text>
+          </ReadMore>
+        </View>
+      )}
       <Line style={styles.line2} />
     </View>
   );

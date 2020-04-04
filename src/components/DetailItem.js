@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Line from './Line';
 import playIcon from '../../assets/play.png';
+import ReadMore from './ReadMore';
 
 const styles = StyleSheet.create({
   headerTitle: {
@@ -18,10 +19,12 @@ const styles = StyleSheet.create({
     color: 'rgb(233, 142, 23)',
     fontFamily: 'drboran',
   },
+  detailTextContainer: {
+    paddingTop: 10,
+  },
   detailText: {
     fontSize: 16,
     color: 'black',
-    paddingTop: 10,
   },
   historyContainer: {
     padding: 20,
@@ -55,7 +58,11 @@ const Detailitem = ({ wat }) => {
     <View>
       <View style={styles.historyContainer}>
         <Text style={styles.headerTitle}>{wat.title}</Text>
-        <Text style={[styles.detailText]}>{wat.detail}</Text>
+        <View style={styles.detailTextContainer}>
+          <ReadMore numberOfLines={4}>
+            <Text style={[styles.detailText]}>{wat.detail}</Text>
+          </ReadMore>
+        </View>
       </View>
       <TouchableOpacity
         style={styles.videoContainer}
@@ -70,7 +77,11 @@ const Detailitem = ({ wat }) => {
       <View style={styles.historyContainer2}>
         <Line style={styles.line1} />
         <Text style={styles.headerTitle}>ประวัติ</Text>
-        <Text style={styles.detailText}>{wat.history}</Text>
+        <View style={styles.detailTextContainer}>
+          <ReadMore numberOfLines={4}>
+            <Text style={styles.detailText}>{wat.history}</Text>
+          </ReadMore>
+        </View>
         <Line style={styles.line2} />
       </View>
     </View>
