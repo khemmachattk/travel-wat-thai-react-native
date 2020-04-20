@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Linking,
   ImageBackground,
+  Dimensions,
 } from 'react-native';
 import Line from './Line';
 import playIcon from '../../assets/play.png';
@@ -51,6 +52,10 @@ const styles = StyleSheet.create({
   },
   line1: { marginBottom: 10 },
   line2: { marginTop: 20 },
+  historyIcon: {
+    width: '100%',
+    marginVertical: 20,
+  },
 });
 
 const Detailitem = ({ wat }) => {
@@ -78,9 +83,25 @@ const Detailitem = ({ wat }) => {
         <Line style={styles.line1} />
         <Text style={styles.headerTitle}>ประวัติ</Text>
         <View style={styles.detailTextContainer}>
-          <ReadMore numberOfLines={4}>
-            <Text style={styles.detailText}>{wat.history}</Text>
-          </ReadMore>
+          {wat.histories.map((history, index) => {
+            if (typeof history === 'string') {
+              return (
+                <ReadMore key={`${index}`} numberOfLines={4}>
+                  <Text style={styles.detailText}>{history}</Text>
+                </ReadMore>
+              );
+            } else {
+              const newHeight =
+                ((Dimensions.get('screen').width - 40) * 723) / 1024;
+              return (
+                <Image
+                  key={`${index}`}
+                  style={[styles.historyIcon, { height: newHeight }]}
+                  source={history}
+                />
+              );
+            }
+          })}
         </View>
         <Line style={styles.line2} />
       </View>

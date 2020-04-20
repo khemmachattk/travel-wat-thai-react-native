@@ -52,7 +52,6 @@ const AlbumScreen = ({ route }) => {
 
   const onViewableItemsChanged = useRef(({ viewableItems }) => {
     if (viewableItems && viewableItems.length !== 0) {
-      console.log(viewableItems[0].index);
       setCurrentIndex(viewableItems[0].index);
     }
   });

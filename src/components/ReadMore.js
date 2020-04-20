@@ -30,7 +30,6 @@ export default class ReadMore extends React.Component {
     // Get the height of the text now that number of lines has been set
     const limitedHeight = await measureHeightAsync(this._text);
 
-    console.log(`${fullHeight} > ${limitedHeight} = ${fullHeight > limitedHeight}`)
     if (fullHeight - limitedHeight > 0.001) {
       this.setState({ shouldShowReadMore: true }, () => {
         this.props.onReady && this.props.onReady();
